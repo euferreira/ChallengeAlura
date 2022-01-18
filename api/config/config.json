@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "emb159753",
+    "database": "desafio_alura",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases" : 0,
+    "timezone" : "-03:00"
+  },
+  "test": {
+    "username": "root",
+    "password": "emb159753",
+    "database": "desafio_alura",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases" : 0,
+    "timezone" : "-03:00"
+  },
+  "production": {
+    "username": "root",
+    "password": "emb159753",
+    "database": "desafio_alura",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases" : 0,
+    "timezone" : "-03:00"
+  }
+}
