@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "emb159753",
-    "database": "desafio_alura",
+    "database": "desafio_alura_testes",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases" : 0,
