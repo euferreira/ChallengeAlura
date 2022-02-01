@@ -11,7 +11,7 @@ class ReceitaController {
      */
     static async insertReceita(req, res, next) {
         try {
-            const inserirRegistro = await receitaService.inserirDados(req.body);
+            const inserirRegistro = await receitaService.criar(req.body);
 
             return inserirRegistro !== null
                 ? res.status(201).json(inserirRegistro)
@@ -29,9 +29,8 @@ class ReceitaController {
      */
     static async getDados(req, res) {
         try {
-            const all = await receitaService.getDados();
-
-            return res.status(200).json(all);
+            const all = await receitaService.findAll();
+            return all.length > 0 ? res.status(200).json(all) : res.status(204);
         } catch (e) {
             return res.status(500).json({send: e.message});
         }
@@ -50,8 +49,7 @@ class ReceitaController {
                 return res.status(400).json({send: 'Informe um ID válido!'});
             }
 
-            const receita = await receitaService.getBydId(Number(id));
-
+            const receita = await receitaService.findOne({id: Number(id)});
             return receita === null ? res.status(204).json() : res.status(200).json(receita);
         } catch (e) {
             return res.status(500).json({send: e.message});
@@ -71,10 +69,10 @@ class ReceitaController {
                 return res.status(400).json({send: 'Informe um ID válido!'});
             }
 
-            const receitaAtualizada = await receitaService.updateReceita(Number(id), req.body);
-            console.log(receitaAtualizada)
-
-            return receitaAtualizada === null ? res.status(400).json({send: "Não foi possível atualizar a receita."}) : res.status(200).json(receitaAtualizada);
+            const receitaAtualizada = await receitaService.update(req.body, {id: Number(id)});
+            return receitaAtualizada === null
+                ? res.status(400).json({send: "Não foi possível atualizar a receita."})
+                : res.status(200).json(receitaAtualizada);
         } catch (e) {
             return res.status(500).json({send: e.message});
         }
@@ -93,9 +91,10 @@ class ReceitaController {
                 return res.status(400).json({send: 'Informe um ID válido!'});
             }
 
-            const receita = await receitaService.deleteReceita(Number(id));
-
-            return receita === null ? res.status(400).json({send : "Não é possível excluir a receita."}) : res.status(200).json(receita);
+            const receita = await receitaService.delete(Number(id));
+            return receita === null
+                ? res.status(400).json({send: "Não é possível excluir a receita."})
+                : res.status(200).json({send: "Receita excluida!"});
         } catch (e) {
             return res.status(500).json({send: e.message});
         }
